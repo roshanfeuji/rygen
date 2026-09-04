@@ -1,0 +1,7 @@
+base\BaseTest.class
+page\OrdersPage.class
+data\OrderDataProvider.class
+page\DashboardPage.class
+page\Login.class
+tests\LoginTest.class
+page\LoginPage.class
