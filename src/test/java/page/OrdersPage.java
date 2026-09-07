@@ -1,82 +1,143 @@
 package page;
 
 import base.BasePage;
-import base.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrdersPage extends BasePage {
 
     By newOrder = By.cssSelector("a[href='/corsair/order/entry']");
+    By creatOrder = By.xpath("//button[contains(@aria-label,'Create Order') or .//span[contains(text(),'Create Order')]]");
 
-    By addAcc1 = By.xpath("//div[@id='stop-1_content']//span[text()='Add Accessorial']");
-    By lco = By.xpath("//div[@id='stop-1_content']//label[text()='Location Name']/..//*[self::input]");
-    By adds = By.xpath("//div[@id='stop-1_content']//label[text()='Address Line 1']/following-sibling::div/input");
-    By locCod = By.xpath("//div[@id='stop-1_content']//label[text()='Location Code']/following-sibling::div/input");
-    By adl2 = By.xpath("//div[@id='stop-1_content']//label[text()='Address Line 2']/..//*[self::input]");
-    By adl3 = By.xpath("//div[@id='stop-1_content']//label[text()='Contact Phone Number']/..//*[self::input] ");
-    By lco2 = By.xpath("//div[@id='stop-2_content']//label[text()='Location Name']/following-sibling::div/input");
-    By adds2 = By.xpath("//div[@id='stop-2_content']//label[text()='Address Line 1']/following-sibling::div/input");
-    By locCod2 = By.xpath("//div[@id='stop-2_content']//label[text()='Location Code']/following-sibling::div/input");
-
-    By a = By.xpath("//div[@id='stop-1_content']//label[text()='Requested Earliest Pickup']/..//*[self::input]");
-    By b = By.xpath("//div[@id='stop-1_content']//label[text()='Carrier Special Instructions']/..//*[self::input]");
-    By tz = By.xpath("//div[@id='stop-1_content']//label[text()='State']/..//*[self::span]");
-    //By a = By.xpath("//div[@id='stop-1_content']//label[text()='Carrier Special Instructions']/..//*[self::span/input or self::input]");
-
-
+    JavascriptExecutor js;
     public OrdersPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
+        js = (JavascriptExecutor) driver;
+
     }
 
 
-    public void createNewOrder() {
+    public void createNewOrder(List<String> data) {
 
         clickAction(newOrder);
-        List<String> list = Arrays.asList("Description", "Handling", "Weight", "Length", "Width", "Height","Value", "Product Number");
+        handleOriginDes(data);
+        handleLineItem(data);
+        fillBasicInformation(data);
+        saveOrder();
 
-        for(String items : list){
-            By loc = dynamicTextX(items);
-            sendKeyAction(loc,10);
-        }
+    }
+    public By dynamicTextX(String field, String values){
+        return By.xpath("//div[@id='"+ field +"']//label[normalize-space()='"+values+"']/..//*[self::input]");
+    }
+    public By dynamicCommentX(String field, String values){
+        return By.xpath("//*[@id='"+ field +"']//label[normalize-space()='"+values+"']/..//*[self::textarea]");
+    }
 
-        wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='line-item-num-1']//label[text()='Stackable']/following-sibling::div/div/input")
-                )
+
+    int dataIndex = 0;
+
+    public void handleOriginDes(List<String> data){
+
+        Map<String, List<String>> map = new LinkedHashMap<>();
+        map.put("stop-1_content", Arrays.asList(
+                "Location Name",
+                "Address Line 1",
+                "Address Line 2",
+                "Address Line 3",
+                "City",
+                "Postal Code",
+                "Location Code",
+                "Contact Name",
+                "Contact Email",
+                "Company Name",
+                "Requested Earliest Pickup")
+        );
+        map.put("stop-2_content", Arrays.asList(
+                "Location Name",
+                "Address Line 1",
+                "Address Line 2",
+                "Address Line 3",
+                "City",
+                "Postal Code",
+                "Location Code",
+                "Contact Name",
+                "Contact Email",
+                "Company Name",
+                "Requested Earliest Dropoff")
         );
 
+        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+            String temp = entry.getKey();
+            List<String> fields = entry.getValue();
+            for (String field : fields) {
 
+                String value = data.get(dataIndex);
 
-//        sendKeyAction(adl2, "dvauv");
-//        sendKeyAction(adl3 , "7981299691");
-//        sendKeyAction(a , "09/09/2026 05:00 pm");
-//
-//        sendKeyAction(lco2, "dvauv");
-//        sendKeyAction(adds2, "dvauv");
-//        sendKeyAction(locCod2, "dvauv");
-//        sendKeyAction(tz, "California");
-//        sendKeyAction(lco, "dvauv");
-//        sendKeyAction(adds, "dvauv");
-//        sendKeyAction(locCod, "dvauv");
-//
-//
-//        //sendKeyAction(b , "09/09/2026 05:00 pm");
+                By locator = dynamicTextX(temp, field);
+                sendKeyAction(locator, value);
+                dataIndex++;
+            }
+            dropDowns(temp,"State", data.get(dataIndex));
+            dataIndex++;
 
+            sendKeyAction(dynamicCommentX(temp, "Internal Notes"), data.get(dataIndex));
+            dataIndex++;
+            sendKeyAction(dynamicCommentX(temp, "Carrier Special Instructions"), data.get(dataIndex));
+            dataIndex++;
+
+        }
 
 
     }
-    public By dynamicTextX(String values){
-        return By.xpath("//div[@id='line-item-num-1']//label[normalize-space()='"+values+"']/..//*[self::input]");
+
+    public void handleLineItem(List<String> data){
+        List<String> list = Arrays.asList(
+                "Description",
+                "Handling",
+                "Weight",
+                "Length",
+                "Width",
+                "Height",
+                "Packaging",
+                "NMFC Number",
+                "Linear Feet",
+                "Product Number",
+                "Density",
+                "Value",
+                "Sales Order Number"
+        );
+
+        for(String i : list){
+            By locator = dynamicTextX("line-item-num-1", i);
+            String value = data.get(dataIndex);
+            sendKeyAction(locator, value);
+            dataIndex++;
+        }
     }
 
-    public void handleTextDropDown(){
+    public void fillBasicInformation(List<String> data){
+        String field = "information";
+        sendKeyAction(dynamicCommentX(field, "Internal Notes"),"Hqduayhvd");
+        dataIndex++;
+        sendKeyAction(dynamicCommentX(field, "Carrier Notes"),"wqsafyqwdf");
+        dataIndex++;
+        dropDowns(field,"Direction", "Inbound");
+        dataIndex++;
+        dropDowns(field,"Billing Terms", data.get(dataIndex));
+        dataIndex++;
+        dropDowns(field,"Requested Mode", data.get(dataIndex));
+        dataIndex++;
+        dropDowns(field,"Equipment Type", data.get(dataIndex));
+        dataIndex++;
 
+    }
+    public void saveOrder(){
+        clickAction(creatOrder);
     }
 
 }

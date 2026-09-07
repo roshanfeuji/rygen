@@ -1,3 +1,4 @@
+base\BasePage.class
 base\BaseTest.class
 page\OrdersPage.class
 data\OrderDataProvider.class

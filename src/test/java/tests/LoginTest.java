@@ -46,7 +46,7 @@ public class LoginTest extends BaseTest {
 
         dashboard.createOrder();
 
-        orders.createNewOrder();
+        orders.createNewOrder(data);
 
 
 
