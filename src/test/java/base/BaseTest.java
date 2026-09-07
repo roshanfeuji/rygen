@@ -44,8 +44,6 @@ public class BaseTest {
         String timestamp = String.valueOf(System.currentTimeMillis());
         String dir = "target/failure-artifacts/";
         new File(dir).mkdirs();
-
-        // Screenshot
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             Files.copy(src.toPath(),
@@ -53,8 +51,6 @@ public class BaseTest {
         } catch (Exception e) {
             System.err.println("Screenshot capture failed: " + e.getMessage());
         }
-
-        // Page source
         try (PrintWriter out = new PrintWriter(dir + testName + "_" + timestamp + ".html")) {
             out.println(driver.getPageSource());
         } catch (Exception e) {

@@ -26,7 +26,11 @@ public class BasePage {
         );
         wait.until(
                 ExpectedConditions.elementToBeClickable(locator)
+        );
+        wait.until(
+                ExpectedConditions.elementToBeClickable(locator)
         ).click();
+
     }
 
     public void sendKeyAction(By locator, Object value) {
@@ -49,46 +53,16 @@ public class BasePage {
         sendKeyAction(b, str);
         clickAction(c);
     }
-    public void bill(String field, String values){
-        By a = By.xpath("//div[@id='" + field + "']//label[normalize-space()='" + values + "']/..//*[self::span]");
-
-        By c = By.xpath("//div[@class='p-select-list-container']//li[1]");
-        clickAction(a);
-        clickAction(c);
-
-    }
-
-    public void scrollToElement(By locator) {
+    public void scrollIntoView(By locator) {
 
         WebElement element = wait.until(
                 ExpectedConditions.presenceOfElementLocated(locator)
         );
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(
-                "arguments[0].scrollIntoView({block: 'center'});",
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
                 element
         );
     }
 
-    public void scrollDown(int pixels) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(
-                "window.scrollBy(0, " + pixels + ");"
-        );
-    }
-
-    public void scrollToTop() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(
-                "window.scrollTo(0, 0);"
-        );
-    }
-
-    public void scrollToBottom() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(
-                "window.scrollTo(0, document.body.scrollHeight);"
-        );
-    }
 
 }

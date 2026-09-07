@@ -120,11 +120,11 @@ public class OrdersPage extends BasePage {
         }
     }
 
-    public void fillBasicInformation(List<String> data){
+    public void fillBasicInformation(List<String> data) {
         String field = "information";
-        sendKeyAction(dynamicCommentX(field, "Internal Notes"),"Hqduayhvd");
+        sendKeyAction(dynamicCommentX(field, "Internal Notes"),data.get(dataIndex));
         dataIndex++;
-        sendKeyAction(dynamicCommentX(field, "Carrier Notes"),"wqsafyqwdf");
+        sendKeyAction(dynamicCommentX(field, "Carrier Notes"),data.get(dataIndex));
         dataIndex++;
         dropDowns(field,"Direction", "Inbound");
         dataIndex++;

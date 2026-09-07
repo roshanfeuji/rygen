@@ -2,35 +2,42 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-09-04T18:29:39 IST" name="Surefire suite" finished-at="2026-09-04T18:30:22 IST" duration-ms="43080">
+  <suite started-at="2026-09-07T16:17:07 IST" name="Rygen Automation Suit" finished-at="2026-09-07T16:18:14 IST" duration-ms="66870">
     <groups>
     </groups>
-    <test started-at="2026-09-04T18:29:39 IST" name="Surefire test" finished-at="2026-09-04T18:30:22 IST" duration-ms="43080">
-      <class name="tests.LoginTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.LoginTest@543588e6]" started-at="2026-09-04T18:29:39 IST" name="setup" finished-at="2026-09-04T18:29:44 IST" duration-ms="4864" status="PASS">
+    <test started-at="2026-09-07T16:17:07 IST" name="Order test" finished-at="2026-09-07T16:18:14 IST" duration-ms="66870">
+      <class name="tests.OrderTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OrderTest@78b41097]" started-at="2026-09-07T16:17:07 IST" name="setup" finished-at="2026-09-07T16:17:14 IST" duration-ms="6880" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method is-config="true" signature="initializePages()[pri:0, instance:tests.LoginTest@543588e6]" started-at="2026-09-04T18:29:44 IST" name="initializePages" finished-at="2026-09-04T18:29:44 IST" duration-ms="51" status="PASS">
+        <test-method is-config="true" signature="initializePages()[pri:0, instance:tests.OrderTest@78b41097]" started-at="2026-09-07T16:17:14 IST" name="initializePages" finished-at="2026-09-07T16:17:14 IST" duration-ms="43" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializePages -->
-        <test-method signature="login(java.util.List)[pri:0, instance:tests.LoginTest@543588e6]" started-at="2026-09-04T18:29:44 IST" name="login" data-provider="orderData" finished-at="2026-09-04T18:30:21 IST" duration-ms="37701" status="PASS">
+        <test-method signature="login(java.util.List)[pri:0, instance:tests.OrderTest@78b41097]" started-at="2026-09-07T16:17:14 IST" name="login" data-provider="orderData" finished-at="2026-09-07T16:18:14 IST" duration-ms="59036" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[15 MCDONALD SACRAMENTO, 1750 Enterprise Boulevard, Suite 100, Dock 2, West Sacramento, California, 95691, United States of America, 6630, West Sacramento Operations, John Smith, 916-555-0147, john.smith@example.com, McDonald's, 09/04/2026 09:00, 09/04/2026 12:00, PDT, false, false, false, test, Please check in with the receiving desk upon arrival and use the designated loading dock., 15 MCDONALD SACRAMENTO, 1750 Enterprise Boulevard, Suite 100, Dock 2, West Sacramento, California, 95691, United States of America, 6630, West Sacramento Operations, John Smith, 916-555-0147, john.smith@example.com, McDonald's, 09/04/2026 09:00, 09/04/2026 12:00, PDT, false, false, false, test, Please check in with the receiving desk upon arrival and use the designated loading dock., Test Product, Box, 100, 10, 20, 15, Carton, 123456, 70, 5, PROD-001, 20, 1000, false, true, false, false, true, PO Number, SO-12345]]]>
+                <![CDATA[[15 MCDONALD SACRAMENTO, 1750 Enterprise Boulevard, Suite 100, Dock 2, West Sacramento, 95691, 6630, John Smith, john.smith@example.com, McDonald's, 09/08/2026 08:00 am, Alaska, Internal note for stop 1, Carrier instruction for stop 1, 15 MCDONALD SACRAMENTO, 1750 Enterprise Boulevard, Suite 100, Dock 2, West Sacramento, 95691, 6630, John Smith, john.smith@example.com, McDonald's, 09/10/2026 08:00 am, California, Internal note for stop 2, Carrier instruction for stop 2, Test Product, 122, 100, 10, 20, 15, Carton, 123456, 5, PROD-001, 20, 1000, 12345, Do not open, Happy Happy Happy, Inbound, Collect, Parcel, Dropdeck]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.LoginTest@543588e6]" started-at="2026-09-04T18:30:21 IST" name="tearDown" finished-at="2026-09-04T18:30:22 IST" duration-ms="403" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.OrderTest@78b41097]" started-at="2026-09-07T16:18:14 IST" name="tearDown" finished-at="2026-09-07T16:18:14 IST" duration-ms="430" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=login status=SUCCESS method=OrderTest.login(java.util.List)[pri:0, instance:tests.OrderTest@78b41097] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- tests.LoginTest -->
-    </test> <!-- Surefire test -->
-  </suite> <!-- Surefire suite -->
+      </class> <!-- tests.OrderTest -->
+    </test> <!-- Order test -->
+  </suite> <!-- Rygen Automation Suit -->
 </testng-results>
