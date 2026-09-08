@@ -33,7 +33,7 @@ public class DashboardPage extends BasePage {
         );
     }
 
-    public void createOrder() {
+    public void createOrder(){
         clickAction(orderButton);
         clickAction(newOrderButton);
         clickAction(By.xpath("//span[text()='Cancel']"));
