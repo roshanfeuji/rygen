@@ -46,8 +46,7 @@ public class BaseTest {
         new File(dir).mkdirs();
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            Files.copy(src.toPath(),
-                    new File(dir + testName + "_" + timestamp + ".png").toPath());
+            Files.copy(src.toPath(), new File(dir + testName + "_" + timestamp + ".png").toPath());
         } catch (Exception e) {
             System.err.println("Screenshot capture failed: " + e.getMessage());
         }

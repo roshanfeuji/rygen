@@ -3,6 +3,7 @@ package page;
 import base.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -10,9 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class OrdersPage extends BasePage {
-
-    By newOrder = By.cssSelector("a[href='/corsair/order/entry']");
-    By creatOrder = By.xpath("//button[contains(@aria-label,'Create Order') or .//span[contains(text(),'Create Order')]]");
 
     JavascriptExecutor js;
     public OrdersPage(WebDriver driver, WebDriverWait wait) {
@@ -29,6 +27,7 @@ public class OrdersPage extends BasePage {
         handleLineItem(data);
         fillBasicInformation(data);
         saveOrder();
+        Assert.assertTrue(orderSuccessPopUp(),"Your order didn't get created, please enter mandatory fields");
 
     }
     public By dynamicTextX(String field, String values){
@@ -137,7 +136,11 @@ public class OrdersPage extends BasePage {
 
     }
     public void saveOrder(){
-        clickAction(creatOrder);
+        clickAction(createOrder);
+    }
+
+    public boolean orderSuccessPopUp(){
+        return isDisplayed(successPopUp);
     }
 
 }

@@ -6,18 +6,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.asserts.Assertion;
 
 public class LoginPage extends BasePage {
-    By username = By.cssSelector("input[placeholder='Enter your username or email address']");
-    By continueButton = By.cssSelector("button[type='submit']");
-    By password =By.cssSelector("input[placeholder='Password']");
-    By signIn = By.cssSelector("button[form='localAccountForm']");
+
 
     public LoginPage(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
 
     }
     public void handleLogin(){
+        Assert.assertTrue(corsairLogo(), " The login page didn't load properly");
         enterUsername("3PLAdminUser");
         clickContinue();
         enterPassword("3plAdmin@2026");
@@ -38,6 +38,9 @@ public class LoginPage extends BasePage {
     public void clickSignIn(){
         clickAction(signIn);
 
+    }
+    public boolean corsairLogo(){
+        return isDisplayed(companyLogo);
     }
 
 }

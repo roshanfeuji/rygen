@@ -5,20 +5,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class DashboardPage extends BasePage {
-    By searchBar = By.cssSelector("input[placeholder='Search Domains']");
-    By searchButton = By.cssSelector("button[aria-label='Submit Search']");
-    By orderButton = By.xpath("//span[text()=\"Order\"]");
-    By newOrderButton = By.xpath("//span[text()=\"New Order\"]");
-
-
 
     public DashboardPage(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
     }
     public void handleDashboard(){
         chooseDomain("JCB");
+        Assert.assertTrue(navBarLogo(), "Page didn't load properly");
+        Assert.assertTrue(isNavBarLocated(), "Nav bar is not located");
         createOrder();
     }
     public void chooseDomain(String domain){
@@ -28,14 +25,20 @@ public class DashboardPage extends BasePage {
                 "//div[@class='p-dialog p-component rygen-modal p-input-filled size-md change-domain-modal']//span[text()='" + domain + "']"
         );
         clickAction(list);
-        wait.until(
-                ExpectedConditions.urlContains("/dashboard")
-        );
+        wait.until(ExpectedConditions.urlContains("/dashboard"));
     }
 
     public void createOrder(){
         clickAction(orderButton);
         clickAction(newOrderButton);
         clickAction(By.xpath("//span[text()='Cancel']"));
+    }
+
+    public boolean isNavBarLocated(){
+        return isDisplayed(navBar);
+    }
+
+    public boolean navBarLogo(){
+        return isDisplayed(appLogo);
     }
 }
