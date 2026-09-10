@@ -22,10 +22,10 @@ public class OrderDataProvider {
                 "John Smith",
                 "john.smith@example.com",
                 "McDonald's",
-                "09/08/2026 08:00 am",
-                "Alaska",
                 "Internal note for stop 1",
                 "Carrier instruction for stop 1",
+                "Alaska",
+
 
 
                 "15 MCDONALD SACRAMENTO",
@@ -38,10 +38,10 @@ public class OrderDataProvider {
                 "John Smith",
                 "john.smith@example.com",
                 "McDonald's",
-                "09/10/2026 08:00 am",
-                "California",
                 "Internal note for stop 2",
                 "Carrier instruction for stop 2",
+                "California",
+
 
                 "Test Product",
                 "122",

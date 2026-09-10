@@ -1,8 +1,11 @@
 package base;
 
+import exceptions.ElementException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.LocalDate;
 
 public class BasePage {
     protected By username = By.cssSelector("input[placeholder='Enter your username or email address']");
@@ -24,9 +27,13 @@ public class BasePage {
     protected By navBar = By.cssSelector(".app-nav-top-container");
     protected By successPopUp = By.cssSelector(".p-toast-summary");
     protected By appLogo = By.cssSelector(".app-header-logo");
+    protected By earlyPickUp = By.xpath("//div[@id='stop-1']//label[normalize-space()='Requested Earliest Pickup']/..//*[self::input]");
+    protected By earlyDropOff = By.xpath("//div[@id='stop-2']//label[normalize-space()='Requested Earliest Dropoff']/..//*[self::input]");
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+
+
 
 
     public BasePage(WebDriver driver, WebDriverWait wait) {
@@ -35,17 +42,37 @@ public class BasePage {
     }
 
     public void clickAction(By locator) {
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
+            wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        } catch ( TimeoutException | ElementClickInterceptedException  e) {
+            throw new ElementException("Failed to click the element "+locator,e);
+        }
+
 
     }
 
     public void sendKeyAction(By locator, Object value) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).clear();
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).sendKeys(String.valueOf(value));
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }
+        catch(TimeoutException | ElementClickInterceptedException e){
+            throw new ElementException("Failed to click the element"+locator, e);
+        }
+
+        try{
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
+            wait.until(ExpectedConditions.elementToBeClickable(locator)).clear();
+            wait.until(ExpectedConditions.elementToBeClickable(locator)).sendKeys(String.valueOf(value));
+        }
+        catch (TimeoutException | ElementClickInterceptedException e){
+            throw new ElementException("Failed to pass the keys inside the element"+locator, e);
+        }
+
+
     }
 
     public void dropDowns(String field, String values, String str) {
@@ -55,6 +82,26 @@ public class BasePage {
         clickAction(a);
         sendKeyAction(b, str);
         clickAction(c);
+    }
+
+    public void selectDate(){
+        LocalDate today = LocalDate.now();
+        String day = String.valueOf(today.getDayOfMonth());
+        By date = By.xpath(
+                "//td[@aria-label='" + day + "']/span"
+        );
+        clickAction(earlyPickUp);
+        clickAction(date);
+    }
+
+    public void selectFutureDate(){
+        LocalDate today = LocalDate.now().plusDays(4);
+        String day = String.valueOf(today.getDayOfMonth());
+        By date = By.xpath(
+                "//td[@aria-label='" + day + "']/span"
+        );
+        clickAction(earlyDropOff);
+        clickAction(date);
     }
     public void scrollIntoView(By locator) {
 

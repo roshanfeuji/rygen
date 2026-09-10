@@ -53,8 +53,7 @@ public class OrdersPage extends BasePage {
                 "Location Code",
                 "Contact Name",
                 "Contact Email",
-                "Company Name",
-                "Requested Earliest Pickup")
+                "Company Name")
         );
         map.put("stop-2_content", Arrays.asList(
                 "Location Name",
@@ -66,8 +65,7 @@ public class OrdersPage extends BasePage {
                 "Location Code",
                 "Contact Name",
                 "Contact Email",
-                "Company Name",
-                "Requested Earliest Dropoff")
+                "Company Name")
         );
 
         for (Map.Entry<String, List<String>> entry : map.entrySet()) {
@@ -81,15 +79,23 @@ public class OrdersPage extends BasePage {
                 sendKeyAction(locator, value);
                 dataIndex++;
             }
-            dropDowns(temp,"State", data.get(dataIndex));
-            dataIndex++;
-
             sendKeyAction(dynamicCommentX(temp, "Internal Notes"), data.get(dataIndex));
             dataIndex++;
             sendKeyAction(dynamicCommentX(temp, "Carrier Special Instructions"), data.get(dataIndex));
             dataIndex++;
+            if(temp.equals("stop-1_content")){
+                selectDate();
+            }
+            else{
+                selectFutureDate();
+            }
+            dropDowns(temp,"State", data.get(dataIndex));
+            dataIndex++;
+
+
 
         }
+
 
 
     }
