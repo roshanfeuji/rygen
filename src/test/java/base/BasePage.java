@@ -4,6 +4,7 @@ import exceptions.ElementException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.LocalDate;
 
@@ -92,6 +93,8 @@ public class BasePage {
         );
         clickAction(earlyPickUp);
         clickAction(date);
+        Assert.assertTrue(wait.until(ExpectedConditions.attributeToBe(date, "aria-selected", "true")),
+                "Date didn't get selected properly");
     }
 
     public void selectFutureDate(){
@@ -102,6 +105,8 @@ public class BasePage {
         );
         clickAction(earlyDropOff);
         clickAction(date);
+        Assert.assertTrue(wait.until(ExpectedConditions.attributeToBe(date, "aria-selected", "true")),
+                "Date didn't get selected properly");
     }
     public void scrollIntoView(By locator) {
 
@@ -112,6 +117,8 @@ public class BasePage {
     public boolean isDisplayed(By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
     }
-
+    public boolean containsUrl(String url){
+        return wait.until(ExpectedConditions.urlContains(url));
+    }
 
 }

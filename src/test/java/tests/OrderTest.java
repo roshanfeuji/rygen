@@ -30,7 +30,7 @@ public class OrderTest extends BaseTest {
         login.handleLogin();
         dashboard.handleDashboard();
         orders.createNewOrder(data);
-        Thread.sleep(6000);
+//        Thread.sleep(6000);
     }
 
 
