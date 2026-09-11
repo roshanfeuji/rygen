@@ -34,27 +34,11 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            dumpFailureArtifacts(result.getMethod().getMethodName());
-        }
         driver.quit();
     }
-
-    private void dumpFailureArtifacts(String testName) {
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        String dir = "target/failure-artifacts/";
-        new File(dir).mkdirs();
-        try {
-            File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            Files.copy(src.toPath(), new File(dir + testName + "_" + timestamp + ".png").toPath());
-        } catch (Exception e) {
-            System.err.println("Screenshot capture failed: " + e.getMessage());
-        }
-        try (PrintWriter out = new PrintWriter(dir + testName + "_" + timestamp + ".html")) {
-            out.println(driver.getPageSource());
-        } catch (Exception e) {
-            System.err.println("Page source dump failed: " + e.getMessage());
-        }
+    public WebDriver getDriver() {
+        return driver;
     }
+
 
 }

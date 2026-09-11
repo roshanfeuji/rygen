@@ -144,6 +144,9 @@
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;Rygen Automation Suit&quot; guice-stage=&quot;DEVELOPMENT&quot; verbose=&quot;0&quot;&gt;
+  &lt;listeners&gt;
+    &lt;listener class-name=&quot;listeners.TestListener&quot;/&gt;
+  &lt;/listeners&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Order test&quot; verbose=&quot;0&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;tests.OrderTest&quot;/&gt;
@@ -190,12 +193,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'login')
 data.setCell(0, 2, 'tests.OrderTest')
-data.setCell(0, 3, 69814);
+data.setCell(0, 3, 56789);
 window.suiteTableData['Rygen_Automation_Suit']= { tableData: data, tableDiv: 'times-div-Rygen_Automation_Suit'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 56 seconds</span>
               <div id="times-div-Rygen_Automation_Suit">
               </div> <!-- times-div-Rygen_Automation_Suit -->
             </div> <!-- times-div -->
@@ -228,15 +231,15 @@ return data;
               </div> <!-- configuration-method before -->
               <div class="configuration-method before">
                 <span class="method-name">initializePages</span>
-                <span class="method-start">14990 ms</span>
+                <span class="method-start">6605 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">login([15 MCDONALD SACRAMENTO, 1750 Enterprise Boulevard, Suite 100, Dock 2, West Sacramento, 95691, 6630,...)</span>
-                <span class="method-start">15011 ms</span>
+                <span class="method-start">6669 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=login status=SUCCESS method=OrderTest.login(java.util.List)[pri:0, instance:tests.O...)</span>
-                <span class="method-start">84854 ms</span>
+                <span class="method-start">63745 ms</span>
               </div> <!-- configuration-method after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

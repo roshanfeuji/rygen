@@ -1,8 +1,11 @@
 base\BasePage.class
 base\BaseTest.class
+utils\AssertionUtils.class
 exceptions\ElementException.class
 page\OrdersPage.class
 data\OrderDataProvider.class
+listeners\TestListener.class
 page\DashboardPage.class
+utils\AllureUtils.class
 tests\OrderTest.class
 page\LoginPage.class

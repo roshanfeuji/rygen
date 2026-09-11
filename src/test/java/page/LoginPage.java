@@ -37,8 +37,8 @@ public class LoginPage extends BasePage {
 
     public void clickSignIn(){
         clickAction(signIn);
-
     }
+
     public boolean corsairLogo(){
         return isDisplayed(companyLogo);
     }
